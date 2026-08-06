@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for ZFESRAP_ROOT_BOOK'
+define service ZFESRAP_ROOT_BOOK_SRVD {
+  expose ZFESRAP_ROOT_BOOK as Books;
+}

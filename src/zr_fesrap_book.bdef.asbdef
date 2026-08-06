@@ -1,0 +1,47 @@
+managed implementation in class ZBP_R_FESRAP_BOOK unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_FESRAP_BOOK alias ZrFesrapBook
+persistent table ZFESRAP_BOOK
+extensible
+draft table ZFESRAP_BOOK_D
+etag master ChangedOn
+lock master total etag ChangedOn
+authorization master( global )
+{
+  field ( readonly )
+   BookID,
+   CreatedAt,
+   CreatedBy,
+   ChangedBy,
+   ChangedOn;
+
+  field ( numbering : managed )
+   BookID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZFESRAP_BOOK corresponding extensible
+  {
+    BookID = BOOK_ID;
+    Name = NAME;
+    Author = AUTHOR;
+    BookCount = BOOK_COUNT;
+    PublishDate = PUBLISH_DATE;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    ChangedBy = CHANGED_BY;
+    ChangedOn = CHANGED_ON;
+  }
+
+}

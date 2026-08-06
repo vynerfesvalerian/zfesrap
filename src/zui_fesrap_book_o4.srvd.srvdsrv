@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_FESRAP_BOOK'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_FESRAP_BOOK'
+  }
+}
+define service ZUI_FESRAP_BOOK_O4 provider contracts odata_v4_ui {
+  expose ZC_FESRAP_BOOK;
+}

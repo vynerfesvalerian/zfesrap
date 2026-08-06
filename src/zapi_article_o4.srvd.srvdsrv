@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition for ZC_ARTICLE'
+define service ZAPI_ARTICLE_O4 {
+  expose ZC_ARTICLE;
+  expose I_Currency      as Currency;
+  expose I_UnitOfMeasure as UnitOfMeasure;
+}

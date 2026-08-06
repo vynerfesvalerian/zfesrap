@@ -1,0 +1,50 @@
+managed implementation in class ZBP_R_ARTICLE unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_ARTICLE alias Article
+persistent table ZDT_ARTICLE
+extensible
+draft table ZDT_ARTICLE_D
+etag master ChangedOn
+lock master total etag ChangedOn
+authorization master( global )
+{
+  field ( readonly )
+   Id,
+   CreatedAt,
+   CreatedBy,
+   ChangedBy,
+   ChangedOn;
+
+  field ( numbering : managed )
+   Id;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  validation validateQuantity on save { field Quantity; create; }
+
+  mapping for ZDT_ARTICLE corresponding extensible
+  {
+    Id = ID;
+    Name = NAME;
+    CurrencyCode = CURRENCY_CODE;
+    UnitOfMeasure = UNIT_OF_MEASURE;
+    UnitPrice = UNIT_PRICE;
+    Quantity  = QUANTITY;
+    CreatedBy = CREATED_BY;
+    CreatedAt = CREATED_AT;
+    ChangedBy = CHANGED_BY;
+    ChangedOn = CHANGED_ON;
+  }
+
+}

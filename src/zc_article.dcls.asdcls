@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZC_FESRAP_BOOK'
+@MappingRole: true
+define role ZC_ARTICLE {
+  grant select on ZC_ARTICLE
+  where INHERITING CONDITIONS FROM ENTITY ZR_ARTICLE REPLACING { ROOT WITH _BaseEntity };
+}
