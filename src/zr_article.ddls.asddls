@@ -9,12 +9,18 @@ define root view entity ZR_ARTICLE
   key id              as Id,
       name            as Name,
       description     as Description,
+      @ObjectModel.foreignKey.association: '_Currency'
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency' } }]
       currency_code   as CurrencyCode,
+      @ObjectModel.foreignKey.association: '_UnitOfMeasure'
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'I_UnitOfMeasure', element: 'UnitOfMeasure' } }]
       unit_of_measure as UnitOfMeasure,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       unit_price      as UnitPrice,
       @Semantics.quantity.unitOfMeasure: 'UnitOfMeasure'
       quantity        as Quantity,
+      @Semantics.amount.currencyCode: 'CurrencyCode'
+      amount          as Amount,
       @Semantics.user.createdBy: true
       created_by      as CreatedBy,
       @Semantics.systemDateTime.createdAt: true

@@ -6,6 +6,8 @@ CLASS lhc_ZR_ARTICLE DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS validateQuantity FOR VALIDATE ON SAVE
         IMPORTING keys FOR Article~validateQuantity.
+    METHODS calculateAmount FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR Article~calculateAmount.
 ENDCLASS.
 
 CLASS lhc_ZR_ARTICLE IMPLEMENTATION.
@@ -38,6 +40,29 @@ CLASS lhc_ZR_ARTICLE IMPLEMENTATION.
 
     ENDLOOP.
 
+  ENDMETHOD.
+
+  METHOD calculateAmount.
+    " Read the changing rows
+    READ ENTITIES OF ZR_ARTICLE IN LOCAL MODE
+        ENTITY Article
+        FIELDS ( Quantity UnitPrice ) WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_article).
+
+    DATA lt_update TYPE TABLE FOR UPDATE ZR_ARTICLE.
+
+    " Calculate and prepare update
+    LOOP AT lt_article ASSIGNING FIELD-SYMBOL(<lfs_article>).
+        APPEND VALUE #( %tky = <lfs_article>-%tky
+                        Amount = <lfs_article>-Quantity * <lfs_article>-UnitPrice
+                      ) TO lt_update.
+
+    ENDLOOP.
+
+    " Modify the entity in local mode
+    MODIFY ENTITIES OF ZR_ARTICLE IN LOCAL MODE
+        ENTITY Article
+        UPDATE FIELDS ( Amount ) WITH lt_update.
   ENDMETHOD.
 
 ENDCLASS.

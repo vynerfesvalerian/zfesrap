@@ -82,6 +82,20 @@ annotate view ZC_ARTICLE with
   } ]
   Quantity;
 
+  @EndUserText.label: 'Amount'
+  @UI.identification: [{
+    position: 51 ,
+    label: 'Amount'
+  }]
+  @UI.lineItem:[{
+    position: 51 ,
+    label: 'Amount'
+  }]
+  @UI.selectionField: [ {
+    position: 51
+  } ]
+  Amount;
+
   @EndUserText.label: 'Created By'
   @UI.identification: [ {
     position: 60 ,

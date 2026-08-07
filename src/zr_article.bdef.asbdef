@@ -12,6 +12,7 @@ authorization master( global )
 {
   field ( readonly )
    Id,
+   Amount,
    CreatedAt,
    CreatedBy,
    ChangedBy,
@@ -32,6 +33,7 @@ authorization master( global )
   draft determine action Prepare;
 
   validation validateQuantity on save { field Quantity; create; }
+  determination calculateAmount on modify {create; field Quantity, UnitPrice; }
 
   mapping for ZDT_ARTICLE corresponding extensible
   {
@@ -41,6 +43,7 @@ authorization master( global )
     UnitOfMeasure = UNIT_OF_MEASURE;
     UnitPrice = UNIT_PRICE;
     Quantity  = QUANTITY;
+    AMOUNT    = AMOUNT;
     CreatedBy = CREATED_BY;
     CreatedAt = CREATED_AT;
     ChangedBy = CHANGED_BY;

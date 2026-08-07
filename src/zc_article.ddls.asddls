@@ -10,12 +10,16 @@ define root view entity ZC_ARTICLE
   key Id,
       Name,
       Description,
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'I_Currency', element: 'Currency' } }]
       CurrencyCode,
+      @Consumption.valueHelpDefinition: [{ entity: { name: 'I_UnitOfMeasure', element: 'UnitOfMeasure' } }]
       UnitOfMeasure,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       UnitPrice,
       @Semantics.quantity.unitOfMeasure: 'UnitOfMeasure'
       Quantity,
+      @Semantics.amount.currencyCode: 'CurrencyCode'
+      Amount,
       @Semantics.user.createdBy: true
       CreatedBy,
       @Semantics.systemDateTime.createdAt: true
